@@ -10,9 +10,11 @@ const ChatContainer = ({ selectedUser, setSelectedUser }) => {
 
     useEffect(() => {
         if(scrollEnd.current) {
-            scrollEnd.current.scrollIntoView({ behavior: 'smooth' })
+            setTimeout(() => {
+                scrollEnd.current?.scrollIntoView({ behavior: 'smooth' })
+            }, 100)
         }
-    }, [])
+    }, [selectedUser, messagesDummyData])
 
   return selectedUser ? (
     <div className="h-full relative overflow-hidden bg-black/20 backdrop-blur-lg rounded-xl">
