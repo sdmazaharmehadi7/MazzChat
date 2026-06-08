@@ -1,15 +1,18 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import assets from '../assets/assets'
+import {AuthContext} from '../../context/AuthContext'
 
 
 const LoginPage = () => {
 
-  const[currState,setCurrState]=useState("Sigh up")
+  const[currState,setCurrState]=useState("Sign up")
   const[fullName,setFullName]=useState("")
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
   const[bio,setBio]=useState("")
   const[isDataSubmitted,setIsDataSubmitted]=useState(false);
+
+  const{login}=useContext(AuthContext)
 
   const onSubmitHandler=(event)=>{
     event.preventDefault();
@@ -18,6 +21,8 @@ const LoginPage = () => {
       setIsDataSubmitted(true)
       return;
     }
+
+    login(currState==="Sign up" ? 'signup' : 'login',{fullName,email,password,bio})
   }
 
   return (
@@ -33,7 +38,7 @@ const LoginPage = () => {
           {isDataSubmitted && <img onClick={()=> setIsDataSubmitted(false)} src={assets.arrow_icon} alt="" className='w-5 cursor-pointer' />}
 
         </h2>
-        {currState==="Sigh up" && !isDataSubmitted &&(
+        {currState==="Sign up" && !isDataSubmitted &&(
         <input onChange={(e)=>setFullName(e.target.value)} value={fullName} 
         type="text" className='p-2 border border-gray-500 rounded-md focus:outline-none' placeholder="Full Name" required/>
         )}

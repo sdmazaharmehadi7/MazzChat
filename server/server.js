@@ -7,6 +7,7 @@ import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
+import cloudinary from "./lib/cloudinary.js";
 
 //create Express app and Http server
 
@@ -46,6 +47,9 @@ app.use(cors());
 app.use("/api/status",(req,res)=>res.send("Server is live"));
 app.use("/api/auth",userRouter);
 app.use("/api/messages",messageRouter)
+
+
+
 
 //connect to mongodb
 await connectDB();
