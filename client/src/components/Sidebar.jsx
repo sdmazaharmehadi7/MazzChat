@@ -44,7 +44,9 @@ const Sidebar = () => {
       </div>
         <div className='flex flex-col gap-3'>
             {filteredUsers.map((user,index)=>(
-                <div key={index} className={`relative flex items-center gap-2 p-2 pl-4rounded-lg cursor-pointer max-sm:text-sm ${selectedUser?.id === user.id && 'bg-[#282142]/50'}`} onClick={() => setSelectedUser(user)}>
+                <div onClick={()=>{setSelectedUser(user); setUnseenMessages(prev=>({
+                    ...prev,[user._id] : 0
+                }))}} key={index} className={`relative flex items-center gap-2 p-2 pl-4rounded-lg cursor-pointer max-sm:text-sm ${selectedUser?.id === user.id && 'bg-[#282142]/50'}`} onClick={() => setSelectedUser(user)}>
                     <img src={user?.profilePic || assets.avatar_icon} alt="user" className='w-9 aspect-square rounded-full' />
                     <div className='flex flex-col leading-5'>
                         <p>{user.fullName}</p>{
